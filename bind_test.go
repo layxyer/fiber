@@ -1702,7 +1702,7 @@ func Test_Bind_WithAutoHandling(t *testing.T) {
 // simple struct validator for testing
 type structValidator struct{}
 
-func (*structValidator) Validate(out any) error {
+func (*structValidator) Validate(out any, c Ctx) error {
 	out = reflect.ValueOf(out).Elem().Interface()
 	sq, ok := out.(simpleQuery)
 	if !ok {

@@ -14,7 +14,7 @@ type CustomBinder interface {
 
 // StructValidator is an interface to register custom struct validator for binding.
 type StructValidator interface {
-	Validate(out any) error
+	Validate(out any, c Ctx) error
 }
 
 // Bind struct
@@ -54,7 +54,7 @@ func (b *Bind) returnErr(err error) error {
 func (b *Bind) validateStruct(out any) error {
 	validator := b.ctx.App().config.StructValidator
 	if validator != nil {
-		return validator.Validate(out)
+		return validator.Validate(out, b.ctx)
 	}
 
 	return nil
